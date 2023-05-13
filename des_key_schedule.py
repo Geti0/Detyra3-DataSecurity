@@ -49,3 +49,16 @@ RHL1 = list(range(2, 29)) + [1] + list(range(30, 57)) + [29]
 # Rotate Halves Left by 2 ( RHL(2) )
 # B56 ne B56
 RHL2 = list(range(3, 29)) + [1, 2] + list(range(31, 57)) + [29, 30]
+
+# k eshte nje celes 64 bitesh ne hyrje
+# Dalja e funksionit eshte nje liste e perbere nga 16 subkey (roundkey) 48 bitesh
+def key_schedule(k):
+	x = pbox(k, PC1, 64)
+	keys = []
+	for round in range(1, 17):
+		if round in [1, 2, 9, 16]:
+			x = pbox(x, RHL1, 56)
+		else:
+			x = pbox(x, RHL2, 56)
+		keys.append(pbox(x, PC2, 56))
+	return keys
