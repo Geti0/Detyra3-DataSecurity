@@ -62,3 +62,14 @@ def key_schedule(k):
 			x = pbox(x, RHL2, 56)
 		keys.append(pbox(x, PC2, 56))
 	return keys
+
+
+#testimi
+celesi_hyres = 'AABB09182736CCDD'
+k = int(celesi_hyres, 16)
+keys = key_schedule(k)
+
+print('16 subkeys ne dalje te secilit round per celesin hyres ', celesi_hyres, ' jane:')
+
+for key in keys:
+    print(hex(key))
